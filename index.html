@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Automation Challenges</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-sidebar: #262630;
+  --bg-main: #32323f;
+  --bg-card: #3a3a48;
+  --accent: #b44747;
+  --text-light: #f1f1f5;
+  --text-muted: #a6a6b5;
+  --border: #464658;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-light);
+  display: flex;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+.sidebar {
+  width: 280px;
+  background-color: var(--bg-sidebar);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: 30px 20px;
+  flex-shrink: 0;
+}
+
+.brand {
+  margin-bottom: 40px;
+}
+
+.brand-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+.brand-accent {
+  color: var(--accent);
+}
+
+.credits {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 5px;
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-item {
+  padding: 12px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+}
+
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.nav-item.active {
+  background-color: rgba(180, 71, 71, 0.15);
+  border-left-color: var(--accent);
+  color: #fff;
+}
+
+.main-content {
+  flex: 1;
+  padding: 50px 60px;
+  overflow-y: auto;
+}
+
+.tab-pane {
+  display: none;
+  max-width: 1000px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.tab-pane.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.challenge-header {
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.challenge-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.challenge-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.meta-item {
+  background-color: var(--bg-sidebar);
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+
+.rules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 24px;
+}
+
+.rule-section {
+  background-color: var(--bg-card);
+  border-radius: 12px;
+  padding: 24px;
+  border-top: 3px solid var(--accent);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.section-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 18px;
+  letter-spacing: 0.5px;
+}
+
+.rule-list {
+  list-style: none;
+}
+
+.rule-list li {
+  margin-bottom: 14px;
+  font-size: 14px;
+  position: relative;
+  padding-left: 18px;
+  color: #d8d8e2;
+}
+
+.rule-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent);
+  border-radius: 50%;
+}
+
+.rule-list strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.rule-list em {
+  display: block;
+  font-style: normal;
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-top: 6px;
+  background-color: rgba(0, 0, 0, 0.15);
+  padding: 8px 12px;
+  border-radius: 6px;
+  border-left: 2px solid var(--border);
+}
+
+@media (max-width: 900px) {
+  body {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 20px;
+  }
+  .nav-menu {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+  .nav-item {
+    white-space: nowrap;
+  }
+  .main-content {
+    padding: 30px 20px;
+  }
+  .rules-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-title">Auto<span class="brand-accent">Challenges</span></div>
+    <div class="credits">by Hoodclassics &amp; Ninjawill2010</div>
+  </div>
+  <ul class="nav-menu">
+    <li class="nav-item active" onclick="switchTab('btcc', this)">BTCC Challenge</li>
+    <li class="nav-item" onclick="switchTab('coming-soon', this)">More Coming Soon...</li>
+  </ul>
+</aside>
+
+<main class="main-content">
+  <div id="btcc" class="tab-pane active">
+    <div class="challenge-header">
+      <h1 class="challenge-title">British Touring Car Championship Challenge</h1>
+      <div class="challenge-meta">
+        <span class="meta-item">Years: 2011–2020</span>
+        <span class="meta-item">Front-engined</span>
+        <span class="meta-item">Weight Max: 1350 kg</span>
+      </div>
+    </div>
+
+    <div class="rules-grid">
+      <div class="rule-section">
+        <h2 class="section-title">Chassis &amp; Body</h2>
+        <ul class="rule-list">
+          <li><strong>Panel material:</strong> Steel, treated steel, partial aluminium, or aluminium allowed; carbon‑fibre panels banned.</li>
+          <li><strong>Chassis type:</strong> Monocoque only.</li>
+          <li><strong>Chassis material:</strong> Any steel or aluminium‑based monocoque material is allowed. Carbon‑fibre monocoque is banned.</li>
+          <li><strong>Engine placement:</strong> Must be a front engine layout (longitudinal or transverse); no mid‑ or rear‑engined.</li>
+          <li><strong>Suspension geometry:</strong> Front: MacPherson Strut or Double Wishbone only. Rear: Semi‑Trailing Arm, Multi‑Link, or Double Wishbone only. <em>No solid axles, torsion beam, pushrod, or leaf‑spring setups.</em></li>
+        </ul>
+      </div>
+
+      <div class="rule-section">
+        <h2 class="section-title">Engine</h2>
+        <ul class="rule-list">
+          <li><strong>Engine layout:</strong> Inline‑4 only. Any head/valve system is allowed (SOHC/DOHC, 4v/5v, with or without VVL) as long as it’s realistic for the year.</li>
+          <li><strong>Displacement:</strong> Total capacity between 1.95 L and 2.00 L.</li>
+          <li><strong>Aspiration:</strong> Single turbocharger only (no superchargers, no twin‑turbo setups, no naturally aspirated engines.) Intercooler allowed.</li>
+          <li><strong>Power window:</strong> Finished engine power between 320 hp and 380 hp.</li>
+          <li><strong>Fuel system:</strong> Fuel injection, if Direct Injection is unlocked for your year, you run Direct Injection.</li>
+          <li><strong>RPM &amp; reliability:</strong> Rev limit between 6 500 rpm and 8 000 rpm; engine reliability must be at least green in the stats.</li>
+          <li><strong>Free for creativity:</strong> Bore vs stroke, compression, cam profile, VVT/VVL choices, turbo size/boost curve, exhaust design and mufflers.</li>
+        </ul>
+      </div>
+
+      <div class="rule-section">
+        <h2 class="section-title">Drivetrain</h2>
+        <ul class="rule-list">
+          <li><strong>Drive type:</strong> FWD or RWD only; AWD and 4x4 are banned.</li>
+          <li><strong>Gearbox type:</strong> 6‑speed Sequential gearbox is mandatory. No manuals, autos or more than 6 gears.</li>
+          <li><strong>Ratios:</strong> Top‑speed slider must give an estimated top speed between 135–155 mph. <em>You're free to choose spacing, but make sure the car actually hits redline in top gear on the gearing graph.</em></li>
+          <li><strong>Differential:</strong> Must use an LSD. Any LSD type is fine, viscous, geared, electronic. <em>Open and locked differentials are banned.</em></li>
+        </ul>
+      </div>
+
+      <div class="rule-section">
+        <h2 class="section-title">Wheels, Tyres &amp; Brakes</h2>
+        <ul class="rule-list">
+          <li><strong>Rim diameter:</strong> 18" rims mandatory front and rear.</li>
+          <li><strong>Rim material:</strong> Alloy or Magnesium only; no Steel and no Carbon‑fibre rims.</li>
+          <li><strong>Tyre type:</strong> Must be Radial. Dry compound: Semi Slicks only.</li>
+          <li><strong>Tyre widths:</strong> Front width between 235 mm and 265 mm. Rear width between 225 mm and 265 mm. <em>Front and rear must be within 20 mm of each other (e.g., 245/245, 255/245 etc.) no drag‑style huge rear or tiny front tyres.</em></li>
+          <li><strong>Brake type:</strong> Disc brakes on all four corners. Front: Vented Discs only. Rear: Solid or Vented Discs allowed. <em>Drum brakes are banned; Carbon‑ceramic discs are banned.</em></li>
+          <li><strong>Brake sizing &amp; pads:</strong> Front diameter must be 300–380 mm; rear 260–340 mm, sized so brake fade stays green in graphs. Pad slider must be between 40 and 80 (aggressive race pads.)</li>
+        </ul>
+      </div>
+
+      <div class="rule-section">
+        <h2 class="section-title">Aero &amp; Cooling</h2>
+        <ul class="rule-list">
+          <li><strong>Undertray:</strong> Must be Clad type undertray.</li>
+          <li><strong>Active aero:</strong> Disabled, no active wings or flaps.</li>
+          <li><strong>Wings / lips / splitters:</strong> You may use front lips/splitters and a single main rear wing or spoiler from the Fixtures. Wing angle sliders must stay in the lower two‑thirds of their range at both ends (no maxed‑out airplane wings).</li>
+          <li><strong>Cooling &amp; brake airflow:</strong> Engine cooling slider must be between 60 and 100% of required cooling. <em>You can’t under‑cool the engine for free drag.</em> Brake airflow slider between 10 and 40 to limit fade.</li>
+        </ul>
+      </div>
+
+      <div class="rule-section">
+        <h2 class="section-title">Interior, Safety &amp; Electronics</h2>
+        <ul class="rule-list">
+          <li><strong>Seats &amp; interior:</strong> 1 or 2 seats only. Interior must be “Basic” or “Sport". Entertainment: “None” or “Basic” only.</li>
+          <li><strong>Safety:</strong> Use the highest safety level unlocked for your chosen year.</li>
+          <li><strong>Steering &amp; driver aids:</strong> Steering: Any hydraulic power steering only. <em>All electronic driver aids must be OFF: no ABS, no Traction Control, no ESC.</em></li>
+        </ul>
+      </div>
+
+      <div class="rule-section">
+        <h2 class="section-title">Suspension</h2>
+        <ul class="rule-list">
+          <li><strong>Spring type:</strong> Standard or Progressive springs only; no Hydropneumatic or Air springs.</li>
+          <li><strong>Dampers:</strong> Gas Mono‑Tube or Adaptive allowed; Semi‑Active and full. <em>Active dampers are banned to keep it analogue.</em></li>
+          <li><strong>Sway bars:</strong> Normal (passive) or sport bars only; no active/semiactive sway bars.</li>
+          <li><strong>Ride height:</strong> Final ride height must be low enough that the car does not bottom out, but not slammed.</li>
+          <li><strong>Tuning:</strong> <em>You're free to choose exact spring rates, damper values, sway bar stiffness and camber.</em></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="coming-soon" class="tab-pane">
+    <div class="challenge-header">
+      <h1 class="challenge-title">More Challenges</h1>
+      <p style="color: var(--text-muted); font-size: 16px;">New challenge rulesets will be added here in the future.</p>
+    </div>
+  </div>
+</main>
+
+<script>
+function switchTab(tabId, element) {
+  const tabs = document.querySelectorAll('.tab-pane');
+  tabs.forEach(tab => tab.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  
+  const navItems = document.querySelectorAll('.nav-item');
+  navItems.forEach(item => item.classList.remove('active'));
+  element.classList.add('active');
+}
+</script>
+
+</body>
+</html>
