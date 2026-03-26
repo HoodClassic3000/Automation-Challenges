@@ -3,6 +3,8 @@
 - Model and trim years:
 - Body styles allowed:
 - Weight max:
+- Maximum quality:
+- Max Engine quality:
 
 ```css
 [ Chassis & body ]
@@ -26,6 +28,7 @@
 - Aspiration:
 - Power window:
 - Fuel system:
+- Fuel types:
 - RPM & reliability:
 - Free for creativity:
 
